@@ -6,6 +6,8 @@ def student_AutomaticGearbox(gear, RPM, longAcc, velocity, throttle, distance, t
     speed = velocity * 3.6
     throttle = 1
     gear_demand = gear
+    if gear_demand == 0:
+        gear_demand = 1
     if RPM > 8000 and gear != 4:
         gear_demand = gear_demand + 1
         
