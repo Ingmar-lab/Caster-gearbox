@@ -1,4 +1,5 @@
 from caster_AutomaticGearbox import caster_AutomaticGearbox
+from Car import Car
 
 def student_AutomaticGearbox(gear, RPM, longAcc, velocity, throttle, distance, timeLap):
 
