@@ -19,24 +19,37 @@ def student_AutomaticGearbox(gear, RPM, longAcc, velocity, throttle, distance, t
     currentWheelSpeed = RPM /60 * 1/currentGearRatio * 1/final_drive_ratio * wheelCircumference * 3.6
     optimalSlip_ = optimal_slip / 100 
     wheelSlip = 1
+    beginningThrottleByGear = [0.5,0.7,1,1]
+
     if speed != 0:
         wheelSlip = (currentWheelSpeed / speed) - 1
+        if wheelSlip < 0:
+            wheelSlip = 0
     else:
         wheelSlip = 0
+        throttle = beginningThrottleByGear[0]
+
     if gear_demand == 0:
+        throttle = beginningThrottleByGear[gear]
         gear_demand = 1
-    if RPM > 9000 and gear != 4:
+    if RPM > 9000 and gear != 4 and wheelSlip <= 1.3:
+       throttle = beginningThrottleByGear[gear]
        gear_demand = gear_demand + 1
-       
-    if speed == 0:
-        throttle = 0.01
-    elif(wheelSlip > optimalSlip_):
-        throttle = throttle * 0.999
-    elif(wheelSlip < optimalSlip_):
-        throttle = throttle * 1.10
+
+
+    """ if gear_demand == 1:
+        throttle = 0.3
+    elif gear_demand == 2:
+        throttle = 0.5  """
+    
+
+    if wheelSlip == optimalSlip_:
+        throttle = throttle
+    elif wheelSlip < optimalSlip_:
+        throttle += 0.01
         
     if throttle > 1:
-        throttle = 1  
+        throttle = 1 
     
     
     # if gear == 1:
@@ -47,7 +60,7 @@ def student_AutomaticGearbox(gear, RPM, longAcc, velocity, throttle, distance, t
     #     throttle = 0.8
     # else:
     #     throttle = 1
-    print(throttle, wheelSlip, optimalSlip_, timeLap, gear, longAcc)
+    print(optimalSlip_, throttle, wheelSlip, RPM, gear, timeLap)
     #print(wheelCircumference)
     # For comparison, uncomment the line below to see how Caster gearbox performs
     #gear_demand = caster_AutomaticGearbox(gear, RPM, longAcc, velocity, throttle, distance, timeLap)
