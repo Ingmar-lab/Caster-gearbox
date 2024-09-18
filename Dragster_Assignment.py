@@ -115,7 +115,7 @@ def caster_InitCommunication (O00OO0OO000O0OOOO ):#line:161
 def main (O00OO0OOO0000O0OO ):#line:178
     print ("Main program Version 2.0")#line:191
     OOOOO0000O0000O0O =caster_InitCommunication (O00OO0OOO0000O0OO )#line:195
-    OO00O0OOO0000OOOO =402 #line:197
+    OO00O0OOO0000OOOO = 402 #line:197
     O0000OOO00000O00O =0 #line:198
     O00OOOO0O0OO00OO0 =list ()#line:199
     O0OOO00O000O0OO00 =1 #line:200
